@@ -18,7 +18,7 @@ from django.conf.urls import include, url
 from django.contrib.auth.models import Group
 
 if not Group.objects.filter(name='Instructors').exists():
-    group = Group(name=role)
+    group = Group(name='Instructors')
     group.save()
 
 urlpatterns = [
