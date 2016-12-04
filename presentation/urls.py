@@ -1,6 +1,6 @@
 from django.conf.urls import include, url
-from .views import login_view as lv
+import presentation.views as views
 
 urlpatterns = [
-    url(r'^$', lv.login, name='login'),
+    url(r'^$', views.login, name='login'),
 ]
