@@ -11,7 +11,7 @@ from . import course_view
 
 def login(request):
     if request.method == 'GET':
-        return render_to_response('login.html')
+        return render_to_response('presentation/login.html')
     # get or post are determined later:
     username = request.POST['username']
     password = request.POST['password']
