@@ -25,7 +25,7 @@ SECRET_KEY = 'ol87&69!yyj@w&=@25a@4c^8!#=erw_$9cx*#q5+l-(5a1n77h'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.elasticbeanstalk.com']
+ALLOWED_HOSTS = ['.elasticbeanstalk.com', 'localhost']
 
 
 # Application definition
@@ -60,7 +60,7 @@ ROOT_URLCONF = 'LearningAnalytics.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

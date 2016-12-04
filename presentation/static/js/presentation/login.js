@@ -16,16 +16,6 @@ function registerTabListener() {
           <input type="password" class="well well-sm well-input" placeholder="Password" name="password" id="password"></input>
         </div>
 
-        <!-- Select user type -->
-        <div class="form-group">
-          <select class="well well-sm well-input" name="usertype">
-            <option value="Participant">Participant</option>
-            <option value="Instructor">Instructor</option>
-            <option value="HR">HR</option>
-            <option value="Administrator">Administrator</option>
-          </select>
-        </div>
-
         <!-- Submit button -->
         <div class="form-group submit">
           <button type="submit" class="btn btn-default">Login</button>
