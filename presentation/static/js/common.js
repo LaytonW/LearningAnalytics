@@ -26,7 +26,7 @@ function redirectHome() {
   var protocol = window.location.protocol;
   var host = window.location.host;
   var pathArray = window.location.pathname.split("/");
-  var newPath = pathArray[1] + "/" + pathArray[2];
+  var newPath = pathArray[1];
   window.location.assign(protocol + "//" + host + "/" + newPath);
 }
 
@@ -42,75 +42,6 @@ function validateForm(form) {
     }
   });
   return validate;
-}
-
-// Respond to a course clicked
-function registerCourseListener() {
-  $(".course:not(.disabled)").click(function () {
-    // Get course name and ID
-    var courseName = $(".course-name", this).text();
-    var courseID = parseInt($(this).attr("id"));
-    console.log("Course " + courseName + " selected");
-    var protocol = window.location.protocol;
-    var host = window.location.host;
-    var pathArray = window.location.pathname.split("/");
-    var newPath = pathArray[1] + "/" + pathArray[2]
-                  + "/" + courseID;
-
-    // Redirect to new URL
-    window.location.assign(protocol + "//" + host + "/" + newPath);
-  });
-}
-
-// Respond to click on course
-function registerModuleListener() {
-  // If developing course clicked
-  $(".module:not(.disabled)").click(function () {
-    // Get course name and ID
-    var moduleName = $(".module-name", this).text();
-    var moduleIndex = parseInt($(this).attr("id"));
-    console.log("Module " + moduleName + " selected");
-
-    // Assemble new URL
-    var protocol = window.location.protocol;
-    var host = window.location.host;
-    var pathArray = window.location.pathname.split("/");
-    var newPath = pathArray[1] + "/" + pathArray[2] + "/" + pathArray[3]
-                  + "/" + moduleIndex;
-
-    // Redirect to new URL
-    window.location.assign(protocol + "//" + host + "/" + newPath);
-  });
-}
-
-// Respond to a category clicked
-function registerCategoryListener() {
-  $(".category").click(function () {
-    // Get category name and ID
-    var categoryName = $(this).text();
-    var categoryID = parseInt($(this).attr("id"));
-    console.log("Category " + categoryName + " selected");
-    var protocol = window.location.protocol;
-    var host = window.location.host;
-    var pathArray = window.location.pathname.split("/");
-    var newPath = pathArray[1] + "/" + pathArray[2]
-                  + "/showCourseList?categoryID=" + categoryID;
-
-    // Redirect to new URL
-    window.location.assign(protocol + "//" + host + "/" + newPath);
-  });
-}
-
-function registerBack2CourseListener() {
-  $("#back").click(function () {
-    var protocol = window.location.protocol;
-    var host = window.location.host;
-    var pathArray = window.location.pathname.split("/");
-    var newPath = pathArray[1] + "/" + pathArray[2] + "/" + pathArray[3];
-
-    // Redirect to new URL
-    window.location.assign(protocol + "//" + host + "/" + newPath);
-  });
 }
 
 $(document).ready(function () {

@@ -43,3 +43,14 @@ def login(request):
                 "result": True,
                 "url": str(newUser.id)
             })
+
+
+def logout(request):
+    auth.logout(request)
+    return redirect('login')
+
+
+@login_required
+def index(request, userID):
+    if request.method == 'GET':
+        return render(request, 'presentation/index.html')
