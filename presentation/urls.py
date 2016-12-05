@@ -6,7 +6,6 @@ from django.contrib.auth.models import Group
 
 
 def init():
-    pass
     try:
         # construct instructor:
         g = Group.objects.get(name='Instructors')
@@ -14,7 +13,7 @@ def init():
             line = reader.readline()
             while line:
                 username = line.split(',')[0]
-                password = line.split(',')[1]
+                password = line.split(',')[1].replace('\n','')
                 user = User.objects.create_user(username=username, password=password)
                 g.user_set.add(user)
                 Instructor.objects.create(user=user)
@@ -46,10 +45,8 @@ def init():
             line = reader.readline()
             while line:
                 studentName = line.split(',')[0]
-                print(studentName)
                 courseName = line.split(',')[1].replace('\n','')
                 student = Student.objects.get(name=str(studentName))
-                print(courseName)
                 course = Course.objects.get(name=str(courseName))
                 student.enrolledCourse.add(course)
                 line =  reader.readline()
