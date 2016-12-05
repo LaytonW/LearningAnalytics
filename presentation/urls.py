@@ -2,12 +2,15 @@ from django.conf.urls import include, url
 import presentation.views as views
 from .models import Instructor, Student, Course
 from django.contrib.auth.models import User
-
+from django.contrib.auth.models import Group
 
 def init():
     try:
-        user = User.objects.create_user(username='test_2', password='1234qwer')
-        user_1 =  User.objects.create_user(username='test_3', password='1234qwer')
+        user = User.objects.create_user(username='test', password='1234qwer')
+        user_1 =  User.objects.create_user(username='test_1', password='1234qwer')
+        g = Group.objects.get(name='Instructors')
+        g.user_set.add(user)
+        g.user_set.add(user_1)
         instructor = Instructor.objects.create(user=user)
         instructor_1 = Instructor.objects.create(user=user_1)
         course = Course.objects.create(name='test', instructor=instructor,average=10)
