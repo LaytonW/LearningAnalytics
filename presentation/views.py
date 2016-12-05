@@ -53,4 +53,8 @@ def logout(request):
 @login_required
 def index(request, userID):
     if request.method == 'GET':
-        return render(request, 'presentation/index.html')
+        courseList = Course.objects.filter(instructor__pk=userID)
+        # update data
+        for course in courseList:
+            course.getCourseAverage()
+        return render('presentation/index.html', RequestContext(request, {'courseList': courseList}))

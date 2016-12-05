@@ -12,7 +12,7 @@ class Course(models.Model):
         Instructor, on_delete=models.CASCADE
     )  # many-to-one
     average = models.FloatField(null=True)
-    def getCourseAverage(self,courseID):
+    def getCourseAverage(self):
         self.average = DataAnalyzer.getCourseData(self.pk, type='average-grade')
     def __str__(self):
         return self.name
