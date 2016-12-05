@@ -41,12 +41,12 @@ class Student(models.Model):
         return self.enrolledCourse.all()
 
     def getRiskFactor(self):
-        self.risk = DataAnalyzer.getRisk(self.pk)
+        self.risk = DataAnalyzer.getRisk(self.name)
         self.save()
     # def getAverageGrade(self):
     #     self.getGrade()
     #     self.save()
 
-    def getGrade(self, courseID):
-        self.grade = DataAnalyzer.getAssessment(self.pk, courseID)
+    def getGrade(self, courseName):
+        self.grade = DataAnalyzer.getAssessment(self.name, courseName)
         self.save()
