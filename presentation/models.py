@@ -30,11 +30,10 @@ class Course(models.Model):
     def __str__(self):
         return self.name
 
-
 class Student(models.Model):
     name = models.CharField(max_length=200, default='default')
-    enrolledCourse = models.ForeignKey(
-        Course, on_delete=models.CASCADE
+    enrolledCourse = models.ManyToManyField(
+        Course,
     )
     risk = models.FloatField(null=True)
     grades = ArrayField(models.FloatField(), null=True)
