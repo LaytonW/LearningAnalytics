@@ -29,15 +29,21 @@ def init():
             instructor=instructor, average=13
         )
         student = Student.objects.create(
-            name='Zixu WANG', enrolledCourse=course,
+            name='Zixu WANG',
             risk=0.2, grades=[80, 80, 80]
         )
+        student.enrolledCourse.add(course)
+        student.enrolledCourse.add(course_1)
         student_1 = Student.objects.create(
-            name='Zhihan CHEN', enrolledCourse=course_1,
+            name='Zhihan CHEN',
             risk=1, grades=[30, 40, 50])
+        student_1.enrolledCourse.add(course)
+        student_1.enrolledCourse.add(course_1)
         student_2 = Student.objects.create(
-            name='Chang GAO', enrolledCourse=course,
+            name='Chang GAO', 
             risk=0.8, grades=[40, 40, 50])
+        student_2.enrolledCourse.add(course)
+        student_2.enrolledCourse.add(course_1)
     except:
         pass
 
