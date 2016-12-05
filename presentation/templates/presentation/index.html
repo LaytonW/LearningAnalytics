@@ -53,7 +53,7 @@
       <a class="link" href="/{{ userID }}/course/?courseID={{ course.id }}">
         <div class="jumbotron course" id="{{ course.id }}">
           <p class="course-name">{{ course.name }}</p>
-          <p class="course-desc">Average score: {{ course.average }}</p>
+          <p class="course-desc">Average score: {{ course.average }}%</p>
         </div>
       </a>
     {% endfor %}
@@ -75,7 +75,7 @@
   {% if not courseList and not studentList %}
     <div class="container-fluid centered text-center">
       <h3 class="info-text jumbotron">
-        You don't have any available analysis result yet.
+        There's no available analysis result yet.
       </h3>
     </div>
   {% else %}

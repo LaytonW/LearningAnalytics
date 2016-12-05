@@ -46,7 +46,7 @@
   <div>
     <h4 class="info-text page-header">Overall</h4>
   </div>
-  <p>Course average: {{ course.average }}</p>
+  <h3>Course average: {{ course.average }}%</h3>
   {% if studentList %}
     <div>
       <h4 class="info-text page-header">Students</h4>
@@ -64,7 +64,7 @@
   {% else %}
     <div class="container-fluid centered text-center">
       <h3 class="info-text jumbotron">
-        You don't have any available analysis result yet.
+        There's no available analysis result yet.
       </h3>
     </div>
   {% endif %}
