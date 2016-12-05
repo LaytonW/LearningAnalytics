@@ -22,6 +22,6 @@ if not Group.objects.filter(name='Instructors').exists():
     group.save()
 
 urlpatterns = [
-    url(r'^$', include('presentation.urls')),
     url(r'^admin/', admin.site.urls),
+    url(r'', include('presentation.urls')),
 ]
