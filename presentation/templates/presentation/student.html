@@ -3,19 +3,17 @@
 {% load static %}
 
 {% block self-style %}
-<link rel="stylesheet/less" href="{% static "presentation/index.less" %}" media="all" type="text/css"/>
 {% endblock %}
 
 {% block self-script %}
-<script src="{% static "js/presentation/index.js" %}" charset="utf-8"></script>
 {% endblock %}
 
-{% block header %}Home{% endblock %}
+{% block header %}{{ student.name }}{% endblock %}
 
 {% block nav %}
 <!-- Menu item: Home -->
 <li>
-  <a class="active" href="#" id="home">
+  <a href="#" id="home">
     <span class="glyphicon glyphicon-home"></span>Home
   </a>
 </li>
@@ -45,6 +43,10 @@
 {% endblock %}
 
 {% block main-content %}
+  <div>
+    <h4 class="info-text page-header">Overall</h4>
+  </div>
+  <p>Risk: {{ student.risk }}</p>
   {% if courseList %}
     <div>
       <h4 class="info-text page-header">Courses</h4>
@@ -53,18 +55,7 @@
       <a class="link" href="/{{ userID }}/course/?courseID={{ course.id }}">
         <div class="jumbotron course" id="{{ course.id }}">
           <p class="course-name">{{ course.name }}</p>
-          <p class="course-desc">Average score: {{ course.average }}</p>
-        </div>
-      </a>
-    {% endfor %}
-    <div>
-      <h4 class="info-text page-header">Students</h4>
-    </div>
-    {% for student in studentList %}
-      <a class="link" href="/{{ userID }}/student/?studentID={{ student.id }}">
-        <div class="jumbotron student" id="{{ student.id }}">
-          <p class="student-name">{{ student.name }}</p>
-          <p class="student-desc">Risk: {{ student.risk }}</p>
+          <p class="course-desc">Score: {{ student.grades }}</p>
         </div>
       </a>
     {% endfor %}

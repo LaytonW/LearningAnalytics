@@ -69,28 +69,75 @@ def index(request, userID):
         return render(
             request,
             'presentation/index.html',
-            {'courseList': courseList, 'studentList': studentList}
+            {
+                'userID': userID,
+                'courseList': courseList,
+                'studentList': studentList
+            }
         )
 
-#
-# @login_required
-# def course_index(request, courseID):
-#     if request.method == "GET":
-#         studentList = Student.objects.filter(enrolledCourse__pk=courseID)
-#         #update data
-#         for student in studentList:
-#             student.getRiskFactor()
-#             student.getGrade(courseID)
-#         return render(
-#           request, 'presentation/course.html', {'studentList': studentList}
-#         )
-#
-#
-# @login_required
-# def studentIndex(request, studentID, courseID):
-#     if request.method == "GET":
-#         student = Student.objects.get(pk=studentID)
-#         student.getGrade(courseID)
-#         return render(
-#           request, 'presentation/student.html', {'student': student}
-#         )
+
+@login_required
+def courses(request, userID):
+    if request.method == 'GET':
+        courseList = list(Instructor.objects.get(user__pk=userID).getCourses())
+        for course in courseList:
+            pass
+            # course.getCourseAverage()
+        return render(
+            request,
+            'presentation/courses.html',
+            {'userID': userID, 'courseList': courseList}
+        )
+
+
+@login_required
+def students(request, userID):
+    if request.method == 'GET':
+        courseList = list(Instructor.objects.get(user__pk=userID).getCourses())
+        studentDict = {}
+        for course in courseList:
+            studentDict[course.name] = list(course.getStudents())
+        for courseName, studentList in studentDict.items():
+            # student.getRiskFactor()
+            # student.getGrade()
+            studentList.sort(key=(lambda x: x.risk), reverse=True)
+        return render(
+            request,
+            'presentation/students.html',
+            {'userID': userID, 'studentDict': studentDict}
+        )
+
+
+@login_required
+def course(request, userID):
+    if request.method == "GET":
+        courseID = request.GET.get('courseID')
+        course = Course.objects.get(id=courseID)
+        studentList = list(course.getStudents())
+        # update data
+        for student in studentList:
+            pass
+            # student.getRiskFactor()
+            # student.getGrade(courseID)
+        studentList.sort(key=(lambda x: x.risk), reverse=True)
+        return render(
+          request,
+          'presentation/course.html',
+          {'userID': userID, 'course': course, 'studentList': studentList}
+        )
+
+
+@login_required
+def student(request, userID):
+    if request.method == "GET":
+        studentID = request.GET.get('studentID')
+        student = Student.objects.get(id=studentID)
+        courseList = list(student.getCourses())
+        # student.getRiskFactor()
+        # student.getGrade(courseID)
+        return render(
+          request,
+          'presentation/student.html',
+          {'userID': userID, 'student': student, 'courseList': courseList}
+        )
