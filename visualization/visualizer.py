@@ -9,6 +9,32 @@ class Visualizer():
 	def __init__(self, filePath):
 		print('visualizer setting up')
 		self.filePath = filePath
+	
+
+	"""	
+		get the data from the file name
+		return the data list
+	"""
+	def getDataFromFile(self, fileName):
+		data_list = []
+		with open(os.path.join(self.filePath,fileName), 'r') as r:
+			line = r.readline()
+			while line:
+				data_list.append(line.split(','))
+				line = r.readline()
+		if debug:
+			print (data_list)
+		return data_list
+
+	def getOption(self, courseID = None, studentID = None, figure_type = None):
+		if figure_type is None:
+			raise Exception('no option setting, please chek')
+		self.courseID = courseID
+		if studentID is not None:
+			self.studentID = studentID
+		else:
+			self.studentID = -1 # -1 means all students which is used in the course visualization
+
 	""" input single time string with format
 		%YY-%mm-%dd
 		output: datetime object. """
@@ -17,6 +43,7 @@ class Visualizer():
 		time_string = time_string.strip()
 		# conversion from str to object
 		return datetime.datetime.strptime(time_string, "%Y-%m-%d")
+
 	def _generateImageName(self, typeName):
 		import random as rand
 		return 'image_' + typeName + '_' + str(rand.randint(1,10000)) + '.png'
@@ -26,6 +53,8 @@ class Visualizer():
 		# validation:
 		if not len(data_X) == len(data_y):
 			raise ValueError('X data (%d) is not consistent with y(%d) in ' % (len(data_X),len(data_y)))
+		if self.courseID is None:
+			re
 		# setting up for input
 		X = np.array([self._parseTime(i) for i in data_X])
 		y = np.array(data_y)
@@ -38,7 +67,9 @@ class Visualizer():
 		plt.savefig(os.path.join(self.filePath, self._generateImageName(title)),bbox_inches='tight',dpi=100)
 
 if __name__ == '__main__':
+
 	visualizer = Visualizer(os.getcwd())
-	data_X = ['2016-11-' + str(i) for i in range(1,31)] + ['2016-12-' + str(i) for i in range(1, 7)]
-	data_y = np.random.normal(0, 1, len(data_X))
+	# data_X = ['2016-11-' + str(i) for i in range(1,31)] + ['2016-12-' + str(i) for i in range(1, 7)]
+	# data_y = np.random.normal(0, 1, len(data_X))
+	data = visualizer.getDataFromFile()
 	visualizer.timeSeriesVisualization(data_X, data_y,'time','random','testing')
