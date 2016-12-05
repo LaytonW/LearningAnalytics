@@ -50,8 +50,15 @@ function highlightRisk() {
     var normalizedRisk = risk * 2 - 1;
     if (normalizedRisk >= 0) {
       var color = "rgba(207, 111, 130, " + normalizedRisk.toString() + ")";
-      console.log(color);
       $(this).css("background-color", color);
+    }
+  });
+  $(".s-risk").each(function () {
+    var risk = parseFloat($(this).attr("id"));
+    var normalizedRisk = risk * 2 - 1;
+    if (normalizedRisk >= 0) {
+      var color = "rgba(204, 0, 0, " + normalizedRisk.toString() + ")";
+      $(this).css("color", color);
     }
   });
 }
