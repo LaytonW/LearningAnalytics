@@ -37,7 +37,7 @@ def init():
             risk=1, grades=[30, 40, 50])
         student_2 = Student.objects.create(
             name='Chang GAO', enrolledCourse=course,
-            risk=0.5, grades=[40, 40, 50])
+            risk=0.8, grades=[40, 40, 50])
     except:
         pass
 

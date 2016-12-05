@@ -44,6 +44,18 @@ function validateForm(form) {
   return validate;
 }
 
+function highlightRisk() {
+  $(".student").each(function () {
+    var risk = parseFloat($(".risk", this).text());
+    var normalizedRisk = risk * 2 - 1;
+    if (normalizedRisk >= 0) {
+      var color = "rgba(207, 111, 130, " + normalizedRisk.toString() + ")";
+      console.log(color);
+      $(this).css("background-color", color);
+    }
+  });
+}
+
 $(document).ready(function () {
   // Set up AJAX for Django CSRF token
   $.ajaxSetup({
@@ -65,4 +77,6 @@ $(document).ready(function () {
     $("a.active").removeClass("active");
     $(this).addClass("active");
   });
+
+  highlightRisk();
 });
