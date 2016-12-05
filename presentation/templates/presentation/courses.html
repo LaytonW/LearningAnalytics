@@ -1,0 +1,65 @@
+{% extends 'presentation/base.html' %}
+
+{% load static %}
+
+{% block self-style %}
+{% endblock %}
+
+{% block self-script %}
+{% endblock %}
+
+{% block header %}Courses{% endblock %}
+
+{% block nav %}
+<!-- Menu item: Home -->
+<li>
+  <a href="#" id="home">
+    <span class="glyphicon glyphicon-home"></span>Home
+  </a>
+</li>
+
+<!-- Menu item: Courses -->
+<li>
+  <a class="active link" href="/{{ userID }}/courses" id="courses">
+    <span class="glyphicon glyphicon-education"></span>Courses
+  </a>
+</li>
+
+<!-- Menu item: Students -->
+<li>
+  <a class="link" href="/{{ userID }}/students" id="students">
+    <span class="glyphicon glyphicon-user"></span>Students
+  </a>
+</li>
+
+<!-- Logout -->
+<div class="menu-bottom">
+  <li>
+    <a href="/logout/" class="link" id="logout">
+      <span class="glyphicon glyphicon-log-out"></span>Logout
+    </a>
+  </li>
+</div>
+{% endblock %}
+
+{% block main-content %}
+  {% if courseList %}
+    {% for course in courseList %}
+      <a class="link" href="/{{ userID }}/course/?courseID={{ course.id }}">
+        <div class="jumbotron course" id="{{ course.id }}">
+          <p class="course-name">{{ course.name }}</p>
+          <p class="course-desc">Average score: {{ course.average }}</p>
+        </div>
+      </a>
+    {% endfor %}
+    <div class="scroll-over"></div>
+  {% else %}
+    <div class="container-fluid centered text-center">
+      <h3 class="info-text jumbotron">
+        You don't have any available analysis result yet.
+      </h3>
+    </div>
+  {% endif %}
+{% endblock %}
+
+{% block extra-modal %}{% endblock %}
