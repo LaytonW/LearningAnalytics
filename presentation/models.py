@@ -38,7 +38,7 @@ class Student(models.Model):
     grades = ArrayField(models.FloatField(), null=True)
 
     def getCourses(self):
-        return []
+        return self.enrolledCourse.all()
 
     def getRiskFactor(self):
         self.risk = DataAnalyzer.getRisk(self.pk)

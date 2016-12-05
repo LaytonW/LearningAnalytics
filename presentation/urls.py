@@ -40,12 +40,12 @@ def init():
         student_1.enrolledCourse.add(course)
         student_1.enrolledCourse.add(course_1)
         student_2 = Student.objects.create(
-            name='Chang GAO', 
+            name='Chang GAO',
             risk=0.8, grades=[40, 40, 50])
         student_2.enrolledCourse.add(course)
         student_2.enrolledCourse.add(course_1)
-    except:
-        pass
+    except Exception as e:
+        print(e)
 
 
 init()

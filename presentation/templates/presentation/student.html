@@ -55,7 +55,12 @@
       <a class="link" href="/{{ userID }}/course/?courseID={{ course.id }}">
         <div class="jumbotron course" id="{{ course.id }}">
           <p class="course-name">{{ course.name }}</p>
-          <p class="course-desc">Score: {{ student.grades }}</p>
+          <p class="course-desc">
+            Score:
+            {% for grade in student.grades %}
+              {{ grade }}{% if not forloop.last %}, {% endif %}
+            {% endfor %}
+          </p>
         </div>
       </a>
     {% endfor %}
