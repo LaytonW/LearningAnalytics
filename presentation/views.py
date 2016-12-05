@@ -64,7 +64,8 @@ def index(request, userID):
         studentList.sort(key=(lambda x: x.risk), reverse=True)
         # update data
         for course in courseList:
-            course.getCourseAverage()
+            pass
+            # course.getCourseAverage()
         return render(
             request,
             'presentation/index.html',
