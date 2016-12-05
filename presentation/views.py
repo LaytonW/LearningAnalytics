@@ -69,17 +69,17 @@ def index(request, userID):
 #         #update data
 #         for student in studentList:
 #             student.getRiskFactor()
-#             student.getGrade()
+#             student.getGrade(courseID)
 #         return render(
 #           request, 'presentation/course.html', {'studentList': studentList}
 #         )
 #
 #
 # @login_required
-# def studentIndex(request, studentID):
+# def studentIndex(request, studentID, courseID):
 #     if request.method == "GET":
 #         student = Student.objects.get(pk=studentID)
-#         student.getGrade()
+#         student.getGrade(courseID)
 #         return render(
 #           request, 'presentation/student.html', {'student': student}
 #         )
