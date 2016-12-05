@@ -36,14 +36,25 @@
       <h4 class="info-text page-header">Courses</h4>
     </div>
     {% for course in courseList %}
-      {% include 'jumbotron.html' %}
-      {% block class %}course{% endblock %}
-      {% block id %}{{ course.id }}{% endblock %}
-      {% block jumbotron-content %}
-        <p class="course-name">{{ course.name }}</p>
-        <p class="course-desc">{{ course.average }}</p>
-      {% endblock %}
+      <a href="#">
+        <div class="jumbotron course" id="{{ course.id }}">
+          <p class="course-name">{{ course.name }}</p>
+          <p class="course-desc">Average score: {{ course.average }}</p>
+        </div>
+      </a>
     {% endfor %}
+    <div>
+      <h4 class="info-text page-header">Students</h4>
+    </div>
+    {% for student in studentList %}
+      <a href="#">
+        <div class="jumbotron student" id="{{ student.id }}">
+          <p class="student-name">{{ student.name }}</p>
+          <p class="student-desc">Risk: {{ student.risk }}</p>
+        </div>
+      </a>
+    {% endfor %}
+    <div class="scroll-over"></div>
   {% else %}
     <div class="container-fluid centered text-center">
       <h3 class="info-text jumbotron">

@@ -7,6 +7,9 @@ from django.contrib.postgres.fields import ArrayField
 class Instructor(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
+    def getCourses(self):
+        return self.course_set.all()
+
 
 class Course(models.Model):
     name = models.CharField(max_length=200)
@@ -14,6 +17,9 @@ class Course(models.Model):
         Instructor, on_delete=models.CASCADE
     )  # many-to-one
     average = models.FloatField(null=True)
+
+    def getStudents(self):
+        return self.student_set.all()
 
     def getCourseAverage(self):
         self.average = DataAnalyzer.getCourseData(
@@ -26,6 +32,7 @@ class Course(models.Model):
 
 
 class Student(models.Model):
+    name = models.CharField(max_length=200, default='default')
     enrolledCourse = models.ForeignKey(
         Course, on_delete=models.CASCADE
     )

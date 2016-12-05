@@ -53,12 +53,21 @@ def logout(request):
 @login_required
 def index(request, userID):
     if request.method == 'GET':
-        courseList = list(Course.objects.filter(instructor__pk=userID))
+        courseList = list(Instructor.objects.get(user__pk=userID).getCourses())
+        studentList = []
+        for course in courseList:
+            studentList.extend(list(course.getStudents()))
+        for student in studentList:
+            #student.getRiskFactor()
+            student.getGrade()
+        studentList.sort(key=(lambda x: x.risk), reverse=True)
         # update data
         for course in courseList:
             course.getCourseAverage()
         return render(
-            request, 'presentation/index.html', {'courseList': courseList}
+            request,
+            'presentation/index.html',
+            {'courseList': courseList, 'studentList': studentList}
         )
 
 #
