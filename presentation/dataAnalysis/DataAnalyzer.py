@@ -15,4 +15,4 @@ def getRisk(studentID):
 
 def getAssessment(studentID):
     # get data from outside db
-    return 90
+    return [90.0,85.5,91.2]

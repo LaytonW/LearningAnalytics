@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from .dataAnalysis import DataAnalyzer
-
+from django.contrib.postgres.fields import ArrayField
 class Instructor(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
@@ -11,8 +11,9 @@ class Course(models.Model):
     instructor = models.ForeignKey(
         Instructor, on_delete=models.CASCADE
     )  # many-to-one
+    average = models.FloatField(null=True)
     def getCourseAverage(self,courseID):
-        return DataAnalyzer.getCourseData(self.pk, type='average-grade')
+        self.average = DataAnalyzer.getCourseData(self.pk, type='average-grade')
     def __str__(self):
         return self.name
 
@@ -21,7 +22,9 @@ class Student(models.Model):
     enrolledCourse = models.ForeignKey(
         Course, on_delete=models.CASCADE
     )
+    risk = models.FloatField(null=True)
+    grades =  ArrayField(models.FloatField(), null=True)
     def getRiskFactor(self):
-        return DataAnalyzer.getRisk(self.pk)
+        self.risk = DataAnalyzer.getRisk(self.pk)
     def getGrade(self):
-        return DataAnalyzer.getAssessment(self.pk)
+        self.grade = DataAnalyzer.getAssessment(self.pk)
