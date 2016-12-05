@@ -53,11 +53,14 @@ def logout(request):
 @login_required
 def index(request, userID):
     if request.method == 'GET':
-        courseList = Course.objects.filter(instructor__pk=userID)
+        courseList = list(Course.objects.filter(instructor__pk=userID))
         # update data
         for course in courseList:
             course.getCourseAverage()
-        return render('presentation/index.html', RequestContext(request, {'courseList': courseList}))
+        return render(
+            request, 'presentation/index.html', {'courseList': courseList}
+        )
+
 #
 # @login_required
 # def course_index(request, courseID):
@@ -67,11 +70,16 @@ def index(request, userID):
 #         for student in studentList:
 #             student.getRiskFactor()
 #             student.getGrade()
-#         return render('presentation/course.html', RequestContext(request, {'studentList': studentList}))
+#         return render(
+#           request, 'presentation/course.html', {'studentList': studentList}
+#         )
+#
 #
 # @login_required
 # def studentIndex(request, studentID):
 #     if request.method == "GET":
 #         student = Student.objects.get(pk=studentID)
 #         student.getGrade()
-#         return render('presentation/student.html', RequestContext(request,{'student': student}))
+#         return render(
+#           request, 'presentation/student.html', {'student': student}
+#         )
