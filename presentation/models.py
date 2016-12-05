@@ -14,6 +14,7 @@ class Course(models.Model):
     average = models.FloatField(null=True)
     def getCourseAverage(self):
         self.average = DataAnalyzer.getCourseData(self.pk, type='average-grade')
+        self.save()
     def __str__(self):
         return self.name
 
@@ -26,5 +27,11 @@ class Student(models.Model):
     grades =  ArrayField(models.FloatField(), null=True)
     def getRiskFactor(self):
         self.risk = DataAnalyzer.getRisk(self.pk)
+        self.save()
+    # def getAverageGrade(self):
+    #     self.getGrade()
+    #     self.save()
+
     def getGrade(self):
         self.grade = DataAnalyzer.getAssessment(self.pk)
+        self.save()

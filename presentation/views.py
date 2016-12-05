@@ -58,3 +58,20 @@ def index(request, userID):
         for course in courseList:
             course.getCourseAverage()
         return render('presentation/index.html', RequestContext(request, {'courseList': courseList}))
+#
+# @login_required
+# def course_index(request, courseID):
+#     if request.method == "GET":
+#         studentList = Student.objects.filter(enrolledCourse__pk=courseID)
+#         #update data
+#         for student in studentList:
+#             student.getRiskFactor()
+#             student.getGrade()
+#         return render('presentation/course.html', RequestContext(request, {'studentList': studentList}))
+#
+# @login_required
+# def studentIndex(request, studentID):
+#     if request.method == "GET":
+#         student = Student.objects.get(pk=studentID)
+#         student.getGrade()
+#         return render('presentation/student.html', RequestContext(request,{'student': student}))
