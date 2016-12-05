@@ -46,6 +46,6 @@ class Student(models.Model):
     #     self.getGrade()
     #     self.save()
 
-    def getGrade(self):
-        self.grade = DataAnalyzer.getAssessment(self.pk)
+    def getGrade(self, courseID):
+        self.grade = DataAnalyzer.getAssessment(self.pk, courseID)
         self.save()
