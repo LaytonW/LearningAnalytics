@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-def getCourseData(courseID, type=None):
+def getCourseData(courseName, type=None):
     if type is None:
         return 0
     elif type == 'average-grade':
@@ -12,7 +12,7 @@ def getCourseData(courseID, type=None):
             line = read.readline()
             while line:
                 lineinfo = line.split(',')
-                if lineinfo[1] == courseID:
+                if lineinfo[1] == courseName:
                     average = lineinfo[2]
                     break
                 else:
@@ -20,19 +20,20 @@ def getCourseData(courseID, type=None):
                 line = read.readline()
         return average
 
-def getRisk(studentID):
+def getRisk(studentName, courseName):
     # do something-else
+    courseAverage = getCourseData(courseName)
+    return 0 + (sum(getAssessment(studentName, courseName)<courseAverage))/3
 
-    return int(studentID)/10
 
-def getAssessment(studentID, courseID):
+def getAssessment(studentName, courseName):
     # get data from outside db
     test = []
     with open('student.data','r') as read:
         line = read.readline()
         while line:
             lineinfo = line.split(',')
-            if lineinfo[0] == studentID and lineinfo[1] == courseID:
+            if lineinfo[0] == studentName and lineinfo[1] == courseName:
                 test.append(lineinfo[2])
             else:
                 pass
