@@ -30,6 +30,16 @@
 </div>
 {% endblock %}
 
-{% block main-content %}{% endblock %}
+{% block main-content %}
+  {% for course in courseList %}
+    {% include 'jumbotron.html' %}
+    {% block class %}course{% endblock %}
+    {% block id %}{{ course.id }}{% endblock %}
+    {% block jumbotron-content %}
+      <p class="course-name">{{ course.name }}</p>
+      <p class="course-desc">{{ course.average }}</p>
+    {% endblock %}
+  {% endfor %}
+{% endblock %}
 
 {% block extra-modal %}{% endblock %}
