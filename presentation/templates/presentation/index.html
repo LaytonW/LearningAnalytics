@@ -31,15 +31,26 @@
 {% endblock %}
 
 {% block main-content %}
-  {% for course in courseList %}
-    {% include 'jumbotron.html' %}
-    {% block class %}course{% endblock %}
-    {% block id %}{{ course.id }}{% endblock %}
-    {% block jumbotron-content %}
-      <p class="course-name">{{ course.name }}</p>
-      <p class="course-desc">{{ course.average }}</p>
-    {% endblock %}
-  {% endfor %}
+  {% if courseList %}
+    <div>
+      <h4 class="info-text page-header">Courses</h4>
+    </div>
+    {% for course in courseList %}
+      {% include 'jumbotron.html' %}
+      {% block class %}course{% endblock %}
+      {% block id %}{{ course.id }}{% endblock %}
+      {% block jumbotron-content %}
+        <p class="course-name">{{ course.name }}</p>
+        <p class="course-desc">{{ course.average }}</p>
+      {% endblock %}
+    {% endfor %}
+  {% else %}
+    <div class="container-fluid centered text-center">
+      <h3 class="info-text jumbotron">
+        You don't have any available analysis result yet.
+      </h3>
+    </div>
+  {% endif %}
 {% endblock %}
 
 {% block extra-modal %}{% endblock %}
