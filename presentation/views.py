@@ -60,3 +60,26 @@ def index(request, userID):
         return render(
             request, 'presentation/index.html', {'courseList': courseList}
         )
+
+#
+# @login_required
+# def course_index(request, courseID):
+#     if request.method == "GET":
+#         studentList = Student.objects.filter(enrolledCourse__pk=courseID)
+#         #update data
+#         for student in studentList:
+#             student.getRiskFactor()
+#             student.getGrade()
+#         return render(
+#           request, 'presentation/course.html', {'studentList': studentList}
+#         )
+#
+#
+# @login_required
+# def studentIndex(request, studentID):
+#     if request.method == "GET":
+#         student = Student.objects.get(pk=studentID)
+#         student.getGrade()
+#         return render(
+#           request, 'presentation/student.html', {'student': student}
+#         )
