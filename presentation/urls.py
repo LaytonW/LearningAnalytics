@@ -12,8 +12,8 @@ def init():
         with open('presentation/data/instructor.csv') as reader:
             line = reader.readline()
             while line:
-                username = line.split(',')[0]
-                password = line.split(',')[1].replace('\n','')
+                username = line.split(',')[0].strip()
+                password = line.split(',')[1].replace('\n','').strip()
                 user = User.objects.create_user(username=username, password=password)
                 g.user_set.add(user)
                 Instructor.objects.create(user=user)
