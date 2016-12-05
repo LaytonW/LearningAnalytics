@@ -58,8 +58,9 @@ def index(request, userID):
         for course in courseList:
             studentList.extend(list(course.getStudents()))
         for student in studentList:
-            #student.getRiskFactor()
-            student.getGrade()
+            pass
+            # student.getRiskFactor()
+            # student.getGrade()
         studentList.sort(key=(lambda x: x.risk), reverse=True)
         # update data
         for course in courseList:

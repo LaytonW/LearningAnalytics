@@ -4,6 +4,7 @@ from .models import Instructor, Student, Course
 from django.contrib.auth.models import User
 from django.contrib.auth.models import Group
 
+
 def init():
     try:
         user = User.objects.create_user(username='hcwang', password='1234qwer')
