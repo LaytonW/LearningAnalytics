@@ -44,20 +44,33 @@ function validateForm(form) {
   return validate;
 }
 
+// Highlight risks.
 function highlightRisk() {
+  // Find student blocks.
   $(".student").each(function () {
+    // For each student block, get the risk.
     var risk = parseFloat($(".risk", this).text());
+    // Normalize the risk in [0.5, 1] to [0, 1].
     var normalizedRisk = risk * 2 - 1;
+    // If the normalized risk is greater than zero,
+    // i.e., the risk is larger than 0.5.
     if (normalizedRisk >= 0) {
+      // Construct the corresponding background color.
       var color = "rgba(207, 111, 130, " + normalizedRisk.toString() + ")";
+      // Alter the block background color.
       $(this).css("background-color", color);
     }
   });
+
+  // Find risk texts.
   $(".s-risk").each(function () {
+    // For each risk text entry, get the risk.
     var risk = parseFloat($(this).attr("id"));
-    var normalizedRisk = risk * 2 - 1;
-    if (normalizedRisk >= 0) {
-      var color = "rgba(204, 0, 0, " + normalizedRisk.toString() + ")";
+    // If risk is greater than 0.5.
+    if (risk >= 0.5) {
+      // Construct the corresponding text color.
+      var color = "rgba(204, 0, 0, " + risk.toString() + ")";
+      // Alter the text color.
       $(this).css("color", color);
     }
   });
@@ -85,5 +98,6 @@ $(document).ready(function () {
     $(this).addClass("active");
   });
 
+  // Highlight risks.
   highlightRisk();
 });
