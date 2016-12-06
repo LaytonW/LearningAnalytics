@@ -45,7 +45,7 @@ def init():
             studentList = line.split(',')
             for i in studentList:
                 i = i.replace('\n', '')
-                Student.objects.create(name=str(i), risk=0)
+                Student.objects.create(name=str(i))
 
         # construct enrollment
         with open('presentation/data/enrollment.csv') as reader:
