@@ -5,6 +5,12 @@ from django.contrib.auth.models import User
 from django.contrib.auth.models import Group
 
 
+""" database setting for demo,
+check the database if it has data,
+otherwise run setting up predefined data for basic functionalities testing.
+"""
+
+
 def init():
     try:
         # construct instructor:
@@ -13,45 +19,44 @@ def init():
             line = reader.readline()
             while line:
                 username = line.split(',')[0].strip()
-                password = line.split(',')[1].replace('\n','').strip()
-                user = User.objects.create_user(username=username, password=password)
+                password = line.split(',')[1].replace('\n', '').strip()
+                user = User.objects.create_user(
+                    username=username, password=password)
                 g.user_set.add(user)
                 Instructor.objects.create(user=user)
                 line = reader.readline()
-        #
+
         # # construct course
         with open('presentation/data/course.csv') as reader:
             line = reader.readline()
             while line:
                 courseName = line.split(',')[0]
-                username = line.split(',')[1].replace('\n','')
+                username = line.split(',')[1].replace('\n', '')
                 instructor = Instructor.objects.get(user__username=username)
                 Course.objects.create(
                     name=courseName,
                     instructor=instructor, average=0
                 )
                 line = reader.readline()
-        #
+
         # # construct students
         with open('presentation/data/student.csv') as reader:
             line = reader.readline()
             studentList = line.split(',')
             for i in studentList:
-                i=i.replace('\n','')
-                Student.objects.create(name=str(i),risk=0)
+                i = i.replace('\n', '')
+                Student.objects.create(name=str(i), risk=0)
 
-    #     # construct enrollment
+        # construct enrollment
         with open('presentation/data/enrollment.csv') as reader:
             line = reader.readline()
             while line:
                 studentName = line.split(',')[0]
-                courseName = line.split(',')[1].replace('\n','')
+                courseName = line.split(',')[1].replace('\n', '')
                 student = Student.objects.get(name=str(studentName))
                 course = Course.objects.get(name=str(courseName))
                 student.enrolledCourse.add(course)
-                line =  reader.readline()
-
-
+                line = reader.readline()
 
     except Exception as e:
         print(e)
@@ -59,6 +64,11 @@ def init():
 
 init()
 
+"""url mapping,
+listening all predefined url pattern,
+map different message to corresponding view function
+where request can be processed properly.
+"""
 urlpatterns = [
     url(r'^$', views.login, name='login'),
     url(r'login/$', views.login, name='login'),

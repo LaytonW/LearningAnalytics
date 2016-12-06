@@ -1,3 +1,9 @@
+""" views,
+core handers for various messages,
+covers all message handing logic for demo
+"""
+
+
 from django.shortcuts import render_to_response, render, get_object_or_404
 from django.shortcuts import redirect
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
@@ -7,6 +13,12 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.contrib.auth.decorators import login_required
 from .models import Course, Instructor, Student
 from django.contrib.auth.models import User, Group
+
+
+""" index url handler,
+receive get request from instructor
+authenticate the user and start valid session
+"""
 
 
 def login(request):
@@ -44,10 +56,20 @@ def login(request):
                 "url": str(newUser.id)
             })
 
+""" logout message url handler,
+receive logout method and terminate current session.k
+"""
+
 
 def logout(request):
     auth.logout(request)
     return redirect('login')
+
+""" Instructor index url handler,
+receive request from success authentication
+return Instructor index page with all course
+listing course average score.
+"""
 
 
 @login_required
@@ -77,6 +99,10 @@ def index(request, userID):
             }
         )
 
+"""courses collection url handler,
+receive request when instructor logs in,
+return all data of the courses taught by the instructor
+"""
 
 @login_required
 def courses(request, userID):
@@ -91,6 +117,10 @@ def courses(request, userID):
             {'userID': userID, 'courseList': courseList}
         )
 
+""" students collection url handler,
+return all students who takes the courses
+taught by the instructor.
+"""
 
 @login_required
 def students(request, userID):
@@ -110,23 +140,34 @@ def students(request, userID):
         )
 
 
+""" single course index url handler,
+receive request after Instructor choose particular course to view,
+return course index page with all student listing by risk factor descently
+"""
+
+
 @login_required
 def course(request, userID):
     if request.method == "GET":
         courseID = request.GET.get('courseID')
         course = Course.objects.get(id=courseID)
+        course.getCourseAverage()
         studentList = list(course.getStudents())
         # update data
         for student in studentList:
-            pass
-            # student.getRiskFactor()
-            # student.getGrade(courseID)
+            student.getRiskFactor(course.name)
+            student.getGrade(course.name)
         studentList.sort(key=(lambda x: x.risk), reverse=True)
         return render(
-          request,
-          'presentation/course.html',
-          {'userID': userID, 'course': course, 'studentList': studentList}
+            request,
+            'presentation/course.html',
+            {'userID': userID, 'course': course, 'studentList': studentList}
         )
+
+""" single student index url handler,
+receive request when Instructor choose particular student to view,
+return student index page with all test scores and other course info
+"""
 
 
 @login_required
@@ -138,7 +179,7 @@ def student(request, userID):
         # student.getRiskFactor()
         # student.getGrade(courseID)
         return render(
-          request,
-          'presentation/student.html',
-          {'userID': userID, 'student': student, 'courseList': courseList}
+            request,
+            'presentation/student.html',
+            {'userID': userID, 'student': student, 'courseList': courseList}
         )
