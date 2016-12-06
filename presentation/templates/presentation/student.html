@@ -2,12 +2,6 @@
 
 {% load static %}
 
-{% block self-style %}
-{% endblock %}
-
-{% block self-script %}
-{% endblock %}
-
 {% block header %}
   {{ student.name }}{% if course %} in {{ course.name }}{% endif %}
 {% endblock %}
@@ -62,9 +56,12 @@
       <div>
         <h4 class="info-text page-header">Courses</h4>
       </div>
-      {% for course, risk, grades, img in courseList %}
+      {% for course, flag, risk, grades, img in courseList %}
+        {% if not flag %}
         <a class="link" href="/{{ userID }}/course/?courseID={{ course.id }}">
-          <div class="jumbotron course" id="{{ course.id }}">
+        {% endif %}
+          <div class="jumbotron course {% if flag %}disabled{% endif %}"
+               id="{{ course.id }}">
             <p class="course-name">{{ course.name }}</p>
             <p class="course-desc">Risk: {{ risk }}</p>
             <p class="course-desc">
@@ -74,7 +71,7 @@
               {% endfor %}
             </p>
           </div>
-        </a>
+        {% if not flag %}</a>{% endif %}
         <img src="{% static img %}" />
       {% endfor %}
       <div class="scroll-over"></div>

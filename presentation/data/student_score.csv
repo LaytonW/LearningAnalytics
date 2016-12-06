@@ -3,70 +3,70 @@ student1,Power transmission and distribution,13,67,10,30
 student1,Signals and linear systems,24,57,17,32
 student1,Communications engineering,12,10,18,13
 student1,Digital system design,39,78,17,44
-student2,Computer organization and microprocessors,85,54,83,74
+student2,Computer organization and microprocessors,85,94,83,81
 student2,Power transmission and distribution,12,10,18,13
 student2,Signals and linear systems,90,68,79,79
 student2,Communications engineering,10,80,25,38
-student2,Electronic circuits,28,58,57,47
+student2,Electric circuits theory,28,58,57,47
 student3,Power electronics,10,80,25,38
 student3,Control and instrumentation,99,57,60,72
-student4,Computer organization and microprocessors,39,78,17,44
+student4,Computer organization and microprocessors,39,38,17,57
 student4,Power transmission and distribution,10,80,25,38
 student4,Signals and linear systems,70,71,94,78
 student4,Digital system design,32,51,81,54
-student4,Electronic circuits,34,10,55,33
+student4,Electric circuits theory,34,10,55,33
 student5,Computer organization and microprocessors,90,68,79,79
 student5,Power transmission and distribution,87,40,54,60
 student5,Communications engineering,11,68,12,30
 student5,Digital system design,42,28,28,32
-student5,Electronic circuits,44,89,18,50
+student5,Electric circuits theory,44,89,18,50
 student6,Power electronics,50,100,10,53
 student6,Control and instrumentation,98,35,95,76
 student7,Computer organization and microprocessors,92,67,84,81
 student7,Signals and linear systems,42,77,94,71
 student7,Communications engineering,98,35,95,76
 student7,Digital system design,11,97,66,58
-student7,Electronic circuits,18,32,12,20
+student7,Electric circuits theory,18,32,12,20
 student8,Power transmission and distribution,50,100,10,53
 student8,Signals and linear systems,42,28,28,32
 student8,Communications engineering,94,53,11,52
 student8,Digital system design,29,78,19,42
-student8,Electronic circuits,64,94,16,58
+student8,Electric circuits theory,64,94,16,58
 student9,Electric circuits theory,77,16,90,61
 student10,Computer organization and microprocessors,70,71,94,78
 student10,Power transmission and distribution,11,68,12,30
 student10,Signals and linear systems,75,40,85,66
 student10,Communications engineering,67,70,84,73
 student10,Digital system design,27,86,41,51
-student11,Computer organization and microprocessors,64,10,96,56
+student11,Computer organization and microprocessors,24,10,96,44
 student11,Power transmission and distribution,30,31,65,42
 student11,Signals and linear systems,86,36,76,66
 student11,Communications engineering,26,36,63,41
-student11,Electronic circuits,55,35,46,45
+student11,Electric circuits theory,55,35,46,45
 student12,Power electronics,94,53,11,52
 student12,Control and instrumentation,23,50,73,48
-student13,Computer organization and microprocessors,23,81,21,41
+student13,Computer organization and microprocessors,63,81,21,54
 student13,Power transmission and distribution,78,96,100,91
 student13,Signals and linear systems,97,20,81,66
 student13,Digital system design,19,84,52,51
-student13,Electronic circuits,36,83,88,69
+student13,Electric circuits theory,36,83,88,69
 student14,Computer organization and microprocessors,60,28,56,48
 student14,Power transmission and distribution,98,35,95,76
 student14,Communications engineering,23,50,73,48
 student14,Digital system design,84,11,61,52
-student14,Electronic circuits,88,58,25,57
+student14,Electric circuits theory,88,58,25,57
 student15,Power electronics,67,70,84,73
 student15,Control and instrumentation,40,66,18,41
 student16,Computer organization and microprocessors,32,51,81,54
 student16,Signals and linear systems,27,86,41,51
 student16,Communications engineering,33,57,93,61
 student16,Digital system design,65,88,68,73
-student16,Electronic circuits,88,62,43,64
+student16,Electric circuits theory,88,62,43,64
 student17,Power transmission and distribution,10,36,19,21
 student17,Signals and linear systems,20,49,65,44
 student17,Communications engineering,11,22,50,27
 student17,Digital system design,30,60,20,36
-student17,Electronic circuits,57,58,86,67
+student17,Electric circuits theory,57,58,86,67
 student18,Electric circuits theory,28,58,57,47
 student19,Computer organization and microprocessors,33,14,81,42
 student19,Power transmission and distribution,41,55,55,50
@@ -77,31 +77,31 @@ student20,Computer organization and microprocessors,42,28,28,32
 student20,Power transmission and distribution,67,70,84,73
 student20,Signals and linear systems,87,45,23,51
 student20,Communications engineering,42,79,61,60
-student20,Electronic circuits,42,32,12,28
+student20,Electric circuits theory,42,32,12,28
 student21,Power electronics,23,50,73,48
 student21,Control and instrumentation,60,78,46,61
 student22,Computer organization and microprocessors,86,19,92,65
 student22,Power transmission and distribution,26,36,63,41
 student22,Signals and linear systems,19,23,57,33
 student22,Digital system design,69,87,53,69
-student22,Electronic circuits,41,83,47,57
+student22,Electric circuits theory,41,83,47,57
 student23,Computer organization and microprocessors,59,81,48,62
 student23,Power transmission and distribution,91,14,33,46
 student23,Communications engineering,55,23,15,31
 student23,Digital system design,85,40,43,56
-student23,Electronic circuits,100,87,97,94
+student23,Electric circuits theory,100,87,97,94
 student24,Power electronics,33,57,93,61
 student24,Control and instrumentation,16,85,100,67
 student25,Computer organization and microprocessors,75,40,85,66
 student25,Signals and linear systems,51,81,93,75
 student25,Communications engineering,31,78,24,44
 student25,Digital system design,61,37,75,57
-student25,Electronic circuits,15,41,86,47
+student25,Electric circuits theory,15,41,86,47
 student26,Power transmission and distribution,60,51,91,67
 student26,Signals and linear systems,40,71,27,46
 student26,Communications engineering,35,29,68,44
 student26,Digital system design,37,71,35,47
-student26,Electronic circuits,37,69,31,45
+student26,Electric circuits theory,37,69,31,45
 student27,Electric circuits theory,71,91,27,63
 student28,Computer organization and microprocessors,11,97,66,58
 student28,Power transmission and distribution,23,50,73,48
@@ -112,31 +112,31 @@ student29,Computer organization and microprocessors,82,75,41,66
 student29,Power transmission and distribution,85,34,35,51
 student29,Signals and linear systems,16,68,95,59
 student29,Communications engineering,39,57,50,48
-student29,Electronic circuits,39,75,81,65
+student29,Electric circuits theory,39,75,81,65
 student30,Power electronics,42,79,61,60
 student30,Control and instrumentation,79,20,44,47
 student31,Computer organization and microprocessors,22,37,67,42
 student31,Power transmission and distribution,30,20,61,37
 student31,Signals and linear systems,30,58,13,33
 student31,Digital system design,56,57,69,60
-student31,Electronic circuits,87,49,44,60
+student31,Electric circuits theory,87,49,44,60
 student32,Computer organization and microprocessors,29,78,19,42
 student32,Power transmission and distribution,33,57,93,61
 student32,Communications engineering,81,73,76,76
 student32,Digital system design,90,81,78,83
-student32,Electronic circuits,15,67,34,38
+student32,Electric circuits theory,15,67,34,38
 student33,Power electronics,70,87,68,75
 student33,Control and instrumentation,39,59,74,57
 student34,Computer organization and microprocessors,42,59,13,38
 student34,Signals and linear systems,61,24,70,51
 student34,Communications engineering,78,78,60,72
 student34,Digital system design,75,82,81,79
-student34,Electronic circuits,66,95,64,75
+student34,Electric circuits theory,66,95,64,75
 student35,Power transmission and distribution,40,66,18,41
 student35,Signals and linear systems,45,18,53,38
 student35,Communications engineering,79,20,44,47
 student35,Digital system design,26,19,95,46
-student35,Electronic circuits,14,86,32,44
+student35,Electric circuits theory,14,86,32,44
 student36,Electric circuits theory,34,10,55,33
 student37,Computer organization and microprocessors,28,30,94,50
 student37,Power transmission and distribution,50,85,95,76
@@ -147,29 +147,29 @@ student38,Computer organization and microprocessors,31,96,71,66
 student38,Power transmission and distribution,83,18,73,58
 student38,Signals and linear systems,50,87,40,59
 student38,Communications engineering,74,66,42,60
-student38,Electronic circuits,51,47,53,50
+student38,Electric circuits theory,51,47,53,50
 student39,Power electronics,35,29,68,44
 student39,Control and instrumentation,56,61,85,67
 student40,Computer organization and microprocessors,27,86,41,51
 student40,Power transmission and distribution,42,79,61,60
 student40,Signals and linear systems,61,37,75,57
 student40,Digital system design,78,80,78,78
-student40,Electronic circuits,25,84,12,40
+student40,Electric circuits theory,25,84,12,40
 student41,Computer organization and microprocessors,66,91,32,63
 student41,Power transmission and distribution,75,18,64,52
 student41,Communications engineering,11,26,89,42
 student41,Digital system design,32,88,54,58
-student41,Electronic circuits,39,61,83,61
+student41,Electric circuits theory,39,61,83,61
 student42,Power electronics,16,85,100,67
 student42,Control and instrumentation,93,80,32,68
 student43,Computer organization and microprocessors,42,60,44,48
 student43,Signals and linear systems,78,12,31,40
 student43,Communications engineering,56,78,90,74
 student43,Digital system design,70,64,22,52
-student43,Electronic circuits,46,69,84,66
+student43,Electric circuits theory,46,69,84,66
 student44,Power transmission anddistribution,70,87,68,75
 student44,Signals and linear systems,17,63,61,47
 student44,Communications engineering,16,31,76,41
 student44,Digital system design,57,58,94,69
-student44,Electronic circuits,84,46,92,74
+student44,Electric circuits theory,84,46,92,74
 student45,Electric circuits theory,44,89,18,50
