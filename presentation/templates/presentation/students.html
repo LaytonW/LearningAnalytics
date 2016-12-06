@@ -43,28 +43,16 @@
 {% endblock %}
 
 {% block main-content %}
-  {% if studentDict %}
-    {% for courseName, studentList in studentDict.items %}
-      <div>
-        <h4 class="info-text page-header">{{ courseName }}</h4>
-      </div>
-      {% if studentList %}
-        {% for student in studentList %}
-          <a class="link" href="/{{ userID }}/student/?studentID={{ student.id }}">
-            <div class="jumbotron student" id="{{ student.id }}">
-              <p class="student-name">{{ student.name }}</p>
-              <p class="student-desc">Risk: {{ student.risk }}</p>
-              <div class="risk">{{ student.risk }}</div>
-            </div>
-          </a>
-        {% endfor %}
-      {% else %}
-        <div class="container-fluid centered text-center">
-          <h3 class="info-text">
-            No student in this course.
-          </h3>
+  {% if studentList %}
+    {% for student, risk, grade in studentList %}
+      <a class="link" href="/{{ userID }}/student/?studentID={{ student.id }}">
+        <div class="jumbotron student" id="{{ student.id }}">
+          <p class="student-name">{{ student.name }}</p>
+          <p class="student-desc">Average Risk: {{ risk }}</p>
+          <p class="student-desc">Average Grade: {{ grade }}</p>
+          <div class="risk">{{ risk }}</div>
         </div>
-      {% endif %}
+      </a>
     {% endfor %}
     <div class="scroll-over"></div>
   {% else %}

@@ -8,27 +8,31 @@ from django.db import models
 from django.contrib.auth.models import User
 from .dataAnalysis import DataAnalyzer
 from django.contrib.postgres.fields import ArrayField
-
-
-""" instructor model,
-handle login and signup
-associate with course he or she teaches
-"""
+from functools import reduce
 
 
 class Instructor(models.Model):
+    """ instructor model,
+    handle login and signup
+    associate with course he or she teaches
+    """
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def getCourses(self):
-        return self.course_set.all()
+        return list(self.course_set.all())
 
-""" course model,
-store the course average data,
-and future data could be addin easily
-"""
+    def getStudents(self):
+        return reduce(
+            lambda x, y: list(set(x + y)),
+            map(lambda x: x.getStudents(), self.getCourses())
+        )
 
 
 class Course(models.Model):
+    """ course model,
+    store the course average data,
+    and future data could be addin easily
+    """
     name = models.CharField(max_length=200)
     instructor = models.ForeignKey(
         Instructor, on_delete=models.CASCADE
@@ -36,7 +40,7 @@ class Course(models.Model):
     average = models.FloatField(null=True)
 
     def getStudents(self):
-        return self.student_set.all()
+        return list(self.student_set.all())
 
     def getCourseAverage(self):
         self.average = DataAnalyzer.getCourseData(
@@ -47,29 +51,40 @@ class Course(models.Model):
     def __str__(self):
         return self.name
 
-""" student model,
-associate with class that he or she takes,
-store the average score for display in student index,
-also store the demo risk factor for display
-"""
-
 
 class Student(models.Model):
+    """ student model,
+    associate with class that he or she takes,
+    store the average score for display in student index,
+    also store the demo risk factor for display
+    """
     name = models.CharField(max_length=200, default='default')
     enrolledCourse = models.ManyToManyField(Course)
-    risk = models.FloatField(null=True)
-    grades = ArrayField(models.FloatField(), null=True)
 
     def getCourses(self):
-        return self.enrolledCourse.all()
+        return list(self.enrolledCourse.all())
 
     def getRiskFactor(self, courseName):
-        self.risk = DataAnalyzer.getRisk(self.name, courseName)
-        self.save()
-    # def getAverageGrade(self):
-    #     self.getGrade()
-    #     self.save()
+        return DataAnalyzer.getRisk(self.name, courseName)
+
+    def getOverallRisk(self):
+        return reduce(
+            lambda x, y: x + y,
+            map(lambda x: self.getRiskFactor(x.name), self.getCourses())
+        ) / float(len(self.getCourses()))
 
     def getGrade(self, courseName):
-        self.grade = DataAnalyzer.getAssessment(self.name, courseName)
-        self.save()
+        return DataAnalyzer.getAssessment(self.name, courseName)
+
+    def getAverageGrade(self):
+        return reduce(
+            lambda x, y: x + y,
+            map(
+                lambda z:
+                    reduce(
+                        lambda a, b: a + b,
+                        self.getGrade(z.name)
+                    ) / float(len(self.getGrade(z.name))),
+                self.getCourses()
+            )
+        ) / float(len(self.getCourses()))
