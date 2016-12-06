@@ -200,8 +200,8 @@ def student(request, userID):
             avgRisk = None
             avgGrade = None
         else:
-            avgRisk = student.getOverallRisk()
-            avgGrade = student.getAverageGrade()
+            avgRisk = "{:10.3f}".format(student.getOverallRisk())
+            avgGrade = "{:10.3f}".format(student.getAverageGrade())
             courseList = []
             for course in student.getCourses():
                 cImgURL = "/images/image_quiz_student_"
