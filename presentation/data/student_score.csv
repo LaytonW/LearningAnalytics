@@ -3,14 +3,14 @@ student1,Power transmission and distribution,13,67,10,30
 student1,Signals and linear systems,24,57,17,32
 student1,Communications engineering,12,10,18,13
 student1,Digital system design,39,78,17,44
-student2,Computer organization and microprocessors,85,54,83,74
+student2,Computer organization and microprocessors,85,94,83,81
 student2,Power transmission and distribution,12,10,18,13
 student2,Signals and linear systems,90,68,79,79
 student2,Communications engineering,10,80,25,38
 student2,Electronic circuits,28,58,57,47
 student3,Power electronics,10,80,25,38
 student3,Control and instrumentation,99,57,60,72
-student4,Computer organization and microprocessors,39,78,17,44
+student4,Computer organization and microprocessors,39,38,17,57
 student4,Power transmission and distribution,10,80,25,38
 student4,Signals and linear systems,70,71,94,78
 student4,Digital system design,32,51,81,54
@@ -38,14 +38,14 @@ student10,Power transmission and distribution,11,68,12,30
 student10,Signals and linear systems,75,40,85,66
 student10,Communications engineering,67,70,84,73
 student10,Digital system design,27,86,41,51
-student11,Computer organization and microprocessors,64,10,96,56
+student11,Computer organization and microprocessors,24,10,96,44
 student11,Power transmission and distribution,30,31,65,42
 student11,Signals and linear systems,86,36,76,66
 student11,Communications engineering,26,36,63,41
 student11,Electronic circuits,55,35,46,45
 student12,Power electronics,94,53,11,52
 student12,Control and instrumentation,23,50,73,48
-student13,Computer organization and microprocessors,23,81,21,41
+student13,Computer organization and microprocessors,63,81,21,54
 student13,Power transmission and distribution,78,96,100,91
 student13,Signals and linear systems,97,20,81,66
 student13,Digital system design,19,84,52,51
