@@ -15,15 +15,18 @@ output: 0 if no type, average score for the specific course if type is defined.
 
 
 def getCourseData(courseName, type=None):
+    # prevent none type calling
     if type is None:
         return 0
     elif type == 'average-grade':
         # read failed return 0
         average = 0
+        # read data from outside result database with predefined schema
         with open('presentation/data/course_average.csv', 'r') as read:
             line = read.readline()
             while line:
                 lineinfo = line.split(',')
+                # filter the data only for the specified course
                 if lineinfo[0] == courseName:
                     average = float(lineinfo[1].replace('\n', ''))
                     break
@@ -41,9 +44,11 @@ use by machine learning method with implementation constraints.
 
 
 def getRisk(studentName, courseName):
+    # call getCourseData and getAssessment function to facilitate
     courseAverage = getCourseData(courseName, 'average-grade')
     scoreList = getAssessment(studentName, courseName)
     count = 0
+    # implement risk calculation logic in a simple way rather than machine learning
     for i in scoreList:
         if float(i) < courseAverage:
             count += 1
@@ -58,10 +63,12 @@ output: student all assessment scores in list.
 def getAssessment(studentName, courseName):
     # get data from outside db
     test = []
+    # read data from outside result database with predefined schema
     with open('presentation/data/student_score.csv', 'r') as read:
         line = read.readline()
         while line:
             lineinfo = line.split(',')
+            # filter the data only for the specified course and student
             if lineinfo[0] == studentName and lineinfo[1] == courseName:
                 for score in lineinfo[2:-1]:
                     test.append(float(score.replace('\n', '')))
@@ -70,4 +77,5 @@ def getAssessment(studentName, courseName):
             line = read.readline()
     if len(test) != 0:
         return test
+    # this is only protection for non-data feedback
     return [90.0, 85.5, 91.2]
