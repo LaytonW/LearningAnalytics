@@ -63,7 +63,8 @@ def getAssessment(studentName, courseName):
         while line:
             lineinfo = line.split(',')
             if lineinfo[0] == studentName and lineinfo[1] == courseName:
-                test.append(float(lineinfo[2].replace('\n', '')))
+                for score in lineinfo[2:-1]:
+                    test.append(float(score.replace('\n', '')))
             else:
                 pass
             line = read.readline()
