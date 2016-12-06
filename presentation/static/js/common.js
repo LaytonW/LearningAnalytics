@@ -55,9 +55,8 @@ function highlightRisk() {
   });
   $(".s-risk").each(function () {
     var risk = parseFloat($(this).attr("id"));
-    var normalizedRisk = risk * 2 - 1;
-    if (normalizedRisk >= 0) {
-      var color = "rgba(204, 0, 0, " + normalizedRisk.toString() + ")";
+    if (risk >= 0.5) {
+      var color = "rgba(204, 0, 0, " + risk.toString() + ")";
       $(this).css("color", color);
     }
   });
