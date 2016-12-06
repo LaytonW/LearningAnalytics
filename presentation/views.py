@@ -273,9 +273,9 @@ def student(request, userID):
                 instructor = Instructor.objects.get(user__pk=userID)
                 # Check
                 if course not in instructor.getCourses():
-                    # If the course is not relate to this instructor,
-                    # continue to handle next course.
-                    continue
+                    disabled = True
+                else:
+                    disabled = False
                 # Get visualization result image.
                 cImgURL = "/images/image_quiz_student_"
                 cImgURL += course.name.replace(' ', '_') + "_"
@@ -284,6 +284,8 @@ def student(request, userID):
                     (
                         # Record the course info,
                         course,
+                        # whether the course is related to the instructor,
+                        disabled,
                         # risk of the student in this course,
                         "{:10.3f}".format(student.getRiskFactor(course.name)),
                         # grades of the student in this course.
@@ -296,7 +298,7 @@ def student(request, userID):
                     )
                 )
             # Sort courses by risks.
-            courseList.sort(key=(lambda x: x[1]), reverse=True)
+            courseList.sort(key=(lambda x: x[2]), reverse=True)
             # Ignore other variables.
             course = None
             risk = None
