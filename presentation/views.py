@@ -76,7 +76,11 @@ def index(request, userID):
         studentList = []
         for student in instructor.getStudents():
             studentList.append(
-                (student, student.getOverallRisk(), student.getAverageGrade())
+                (
+                    student,
+                    "{:3f}".format(student.getOverallRisk()),
+                    "{:3f}".format(student.getAverageGrade())
+                )
             )
         studentList.sort(key=(lambda x: x[1]), reverse=True)
         # update data
@@ -122,7 +126,11 @@ def students(request, userID):
         studentList = []
         for student in instructor.getStudents():
             studentList.append(
-                (student, student.getOverallRisk(), student.getAverageGrade())
+                (
+                    student,
+                    "{:3f}".format(student.getOverallRisk()),
+                    "{:3f}".format(student.getAverageGrade())
+                )
             )
         studentList.sort(key=(lambda x: x[1]), reverse=True)
         return render(
@@ -148,8 +156,8 @@ def course(request, userID):
             studentList.append(
                 (
                     student,
-                    student.getRiskFactor(course.name),
-                    student.getGrade(course.name)
+                    "{:3f}".format(student.getRiskFactor(course.name)),
+                    "{:3f}".format(student.getGrade(course.name))
                 )
             )
         studentList.sort(key=(lambda x: x[1]), reverse=True)
@@ -177,8 +185,8 @@ def student(request, userID):
         courseID = request.GET.get('courseID')
         if courseID is not None:
             course = Course.objects.get(id=courseID)
-            risk = student.getRiskFactor(course.name)
-            grades = student.getGrade(course.name)
+            risk = "{:3f}".format(student.getRiskFactor(course.name))
+            grades = "{:3f}".format(student.getGrade(course.name))
             imgURL = "/images/image_quiz_student_"
             imgURL += course.name.replace(' ', '_') + "_"
             imgURL += student.name.replace(' ', '_') + ".png"
@@ -196,8 +204,8 @@ def student(request, userID):
                 courseList.append(
                     (
                         course,
-                        student.getRiskFactor(course.name),
-                        student.getGrade(course.name),
+                        "{:3f}".format(student.getRiskFactor(course.name)),
+                        "{:3f}".format(student.getGrade(course.name)),
                         cImgURL
                     )
                 )
