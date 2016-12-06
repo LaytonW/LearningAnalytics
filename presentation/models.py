@@ -51,6 +51,7 @@ class Course(models.Model):
             self.name, type='average-grade'
         )
         self.save()
+
     # simple built in function to show name of course
     def __str__(self):
         return self.name
