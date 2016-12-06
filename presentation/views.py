@@ -1,3 +1,9 @@
+""" views,
+core handers for various messages,
+covers all message handing logic for demo
+"""
+
+
 from django.shortcuts import render_to_response, render, get_object_or_404
 from django.shortcuts import redirect
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
@@ -10,6 +16,10 @@ from django.contrib.auth.models import User, Group
 
 
 def login(request):
+    """ index url handler,
+    receive get request from instructor
+    authenticate the user and start valid session
+    """
     if request.method == 'GET':
         return render(request, 'presentation/login.html')
     username = request.POST.get('username')
@@ -46,45 +56,54 @@ def login(request):
 
 
 def logout(request):
+    """ logout message url handler,
+    receive logout method and terminate current session.k
+    """
     auth.logout(request)
     return redirect('login')
 
 
 @login_required
 def index(request, userID):
+    """ Instructor index url handler,
+    receive request from success authentication
+    return Instructor index page with all course
+    listing course average score.
+    """
     if request.method == 'GET':
-        courseList = list(Instructor.objects.get(user__pk=userID).getCourses())
+        instructor = Instructor.objects.get(user__pk=userID)
+        courseList = instructor.getCourses()
         studentList = []
-        for course in courseList:
-            studentList.extend(list(course.getStudents()))
-        for student in studentList:
-            pass
-            # student.getRiskFactor()
-            # student.getGrade()
-        studentList = list(set(studentList))
-        studentList.sort(key=(lambda x: x.risk), reverse=True)
+        for student in instructor.getStudents():
+            studentList.append(
+                (student, student.getOverallRisk(), student.getAverageGrade())
+            )
+        studentList.sort(key=(lambda x: x[1]), reverse=True)
         # update data
         for course in courseList:
-            pass
-            # course.getCourseAverage()
+            course.getCourseAverage()
         return render(
             request,
             'presentation/index.html',
             {
                 'userID': userID,
                 'courseList': courseList,
-                'studentList': studentList
+                'studentList': studentList[:5]
             }
         )
 
 
 @login_required
 def courses(request, userID):
+    """courses collection url handler,
+    receive request when instructor logs in,
+    return all data of the courses taught by the instructor
+    """
     if request.method == 'GET':
-        courseList = list(Instructor.objects.get(user__pk=userID).getCourses())
+        instructor = Instructor.objects.get(user__pk=userID)
+        courseList = instructor.getCourses()
         for course in courseList:
-            pass
-            # course.getCourseAverage()
+            course.getCourseAverage()
         return render(
             request,
             'presentation/courses.html',
@@ -94,51 +113,105 @@ def courses(request, userID):
 
 @login_required
 def students(request, userID):
+    """ students collection url handler,
+    return all students who takes the courses
+    taught by the instructor.
+    """
     if request.method == 'GET':
-        courseList = list(Instructor.objects.get(user__pk=userID).getCourses())
-        studentDict = {}
-        for course in courseList:
-            studentDict[course.name] = list(course.getStudents())
-        for courseName, studentList in studentDict.items():
-            # student.getRiskFactor()
-            # student.getGrade()
-            studentList.sort(key=(lambda x: x.risk), reverse=True)
+        instructor = Instructor.objects.get(user__pk=userID)
+        studentList = []
+        for student in instructor.getStudents():
+            studentList.append(
+                (student, student.getOverallRisk(), student.getAverageGrade())
+            )
+        studentList.sort(key=(lambda x: x[1]), reverse=True)
         return render(
             request,
             'presentation/students.html',
-            {'userID': userID, 'studentDict': studentDict}
+            {'userID': userID, 'studentList': studentList}
         )
 
 
 @login_required
 def course(request, userID):
+    """ single course index url handler,
+    receive request after Instructor choose particular course to view,
+    return course index page with all student listing by risk factor descently
+    """
     if request.method == "GET":
         courseID = request.GET.get('courseID')
         course = Course.objects.get(id=courseID)
-        studentList = list(course.getStudents())
+        course.getCourseAverage()
+        studentList = []
         # update data
-        for student in studentList:
-            pass
-            # student.getRiskFactor()
-            # student.getGrade(courseID)
-        studentList.sort(key=(lambda x: x.risk), reverse=True)
+        for student in course.getStudents():
+            studentList.append(
+                (
+                    student,
+                    student.getRiskFactor(course.name),
+                    student.getGrade(course.name)
+                )
+            )
+        studentList.sort(key=(lambda x: x[1]), reverse=True)
+        imgURL = "/images/image_average_quiz_grade_course_"
+        imgURL += course.name.replace(' ', '_') + ".png"
         return render(
-          request,
-          'presentation/course.html',
-          {'userID': userID, 'course': course, 'studentList': studentList}
+            request,
+            'presentation/course.html',
+            {
+                'userID': userID, 'course': course,
+                'studentList': studentList, 'imgURL': imgURL
+            }
         )
 
 
 @login_required
 def student(request, userID):
+    """ single student index url handler,
+    receive request when Instructor choose particular student to view,
+    return student index page with all test scores and other course info
+    """
     if request.method == "GET":
         studentID = request.GET.get('studentID')
         student = Student.objects.get(id=studentID)
-        courseList = list(student.getCourses())
-        # student.getRiskFactor()
-        # student.getGrade(courseID)
+        courseID = request.GET.get('courseID')
+        if courseID is not None:
+            course = Course.objects.get(id=courseID)
+            risk = student.getRiskFactor(course.name)
+            grades = student.getGrade(course.name)
+            imgURL = "/images/image_quiz_student_"
+            imgURL += course.name.replace(' ', '_') + "_"
+            imgURL += student.name.replace(' ', '_') + ".png"
+            courseList = None
+            avgRisk = None
+            avgGrade = None
+        else:
+            avgRisk = student.getOverallRisk()
+            avgGrade = student.getAverageGrade()
+            courseList = []
+            for course in student.getCourses():
+                cImgURL = "/images/image_quiz_student_"
+                cImgURL += course.name.replace(' ', '_') + "_"
+                cImgURL += student.name.replace(' ', '_') + ".png"
+                courseList.append(
+                    (
+                        course,
+                        student.getRiskFactor(course.name),
+                        student.getGrade(course.name),
+                        cImgURL
+                    )
+                )
+            courseList.sort(key=(lambda x: x[1]), reverse=True)
+            course = None
+            risk = None
+            grades = None
+            imgURL = None
         return render(
-          request,
-          'presentation/student.html',
-          {'userID': userID, 'student': student, 'courseList': courseList}
+            request,
+            'presentation/student.html',
+            {
+                'userID': userID, 'student': student, 'imgURL': imgURL,
+                'course': course, 'courseList': courseList, 'avgRisk': avgRisk,
+                'avgGrade': avgGrade, 'risk': risk, 'grades': grades
+            }
         )

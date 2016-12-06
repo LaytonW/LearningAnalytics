@@ -60,14 +60,15 @@
   {% endif %}
   {% if studentList %}
     <div>
-      <h4 class="info-text page-header">Students</h4>
+      <h4 class="info-text page-header">High Risk Students</h4>
     </div>
-    {% for student in studentList %}
+    {% for student, risk, grade in studentList %}
       <a class="link" href="/{{ userID }}/student/?studentID={{ student.id }}">
         <div class="jumbotron student" id="{{ student.id }}">
           <p class="student-name">{{ student.name }}</p>
-          <p class="student-desc">Risk: {{ student.risk }}</p>
-          <div class="risk">{{ student.risk }}</div>
+          <p class="student-desc">Average Risk: {{ risk }}</p>
+          <p class="student-desc">Average Grade: {{ grade }}</p>
+          <div class="risk">{{ risk }}</div>
         </div>
       </a>
     {% endfor %}
